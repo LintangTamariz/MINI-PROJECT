@@ -1,36 +1,39 @@
 // index.jsx
-import React from 'react';
-import { BrowserRouter as Router,Route, Routes } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 
-import Home from './pages/Home';
-import Products from './pages/Products';
-import ProductDetail from './pages/ProductDetail';
-import Search from './pages/Search';
-import Header from './component/Header';
-import Footer from './component/Footer';
-
-
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
+import Search from "./pages/Search";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
+import Login from "./component/Login";
+import Register from "./component/Register";
 
 const Layout = () => {
+  const location = useLocation();
   return (
     <div>
-      <Header/>
+      {window.location.pathname !== '/login' && window.location.pathname !== '/register' && <Header />}
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/products/:id" element={<Products/>}/>
-        <Route path="/product/:id" element={<ProductDetail/>}/>
-        <Route path="/search" element={<Search/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products/:id" element={<Products />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
-      <Footer/>
+      {window.location.pathname !== '/login' && window.location.pathname !== '/register' && <Footer />}
     </div>
-  )
-}
+  );
+};
 
 const App = () => {
   return (
     <div>
       <Router>
-        <Layout/>
+        <Layout />
       </Router>
     </div>
   );

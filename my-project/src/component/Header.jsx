@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import SearchFrom from "../component/SearchForm";
 import CategoryNavMobile from "../component/CategoryNavMobile";
-import Cart from "../component/Cart";
+import Cart from "../component/Cart"; 
 
 import { CartContext } from "../context/CartContext";
 
