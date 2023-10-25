@@ -13,7 +13,7 @@ import Cart from "../component/Cart";
 import { CartContext } from "../context/CartContext";
 
 const Header = () => {
-  const { isOpen, setIsOpen } = useContext(CartContext);
+  const { isOpen, setIsOpen, itemsAmount } = useContext(CartContext);
   const [catNavMobile, setCatNavMobile] = useState(false);
   return (
     <header className="bg-[#1A1C21] shadow-xl py-6 fixed w-full z-40 lg:relative xl:mb-[30px]">
@@ -71,7 +71,7 @@ const Header = () => {
                 />
               </svg>
               <div className="bg-[#F5B321] text-black absolute w-[15px] h-[15px] rounded-full top-3 text-center text-sm -right-1 flex justify-center items-center font-bold tracking-[-0.1em]">
-                20
+                {itemsAmount}
               </div>
             </div>
             <div

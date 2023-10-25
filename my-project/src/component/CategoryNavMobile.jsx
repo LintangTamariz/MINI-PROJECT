@@ -1,6 +1,13 @@
 import React from "react";
 
+import {Link} from "react-router-dom";
+
+import useFetch from "../hooks/useFetch";
+
 const CategoryNavMobile = ({ setCatNavMobile }) => {
+
+  const {data} =  useFetch("http://localhost:1337/api/categories?");
+   
   return (
     <div className="w-full h-full bg-[#1A1C21] p-8">
       <div 
@@ -21,7 +28,19 @@ const CategoryNavMobile = ({ setCatNavMobile }) => {
           />
         </svg>
       </div>
-      CategoryNavMobile
+      <div className="flex flex-col gap-y-8">
+        {data?.map((category) => {
+          return (
+          <Link 
+          to={`products/${category.id}`}
+          className="uppercase font-medium" 
+          key={category.id}
+          >
+            {category.attributes.title} Cameras
+          </Link>
+          )
+        })}
+      </div>
     </div>
   );
 };
