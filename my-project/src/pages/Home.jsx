@@ -2,6 +2,7 @@ import React from 'react';
 
 import Latest from '../component/Latest';
 import Hero from '../component/Hero';
+import Chat from "../component/Chat";
 
 
 const Home = () => {
@@ -9,6 +10,8 @@ const Home = () => {
     <section>
       <Hero/>
       <Latest/>
+      <Chat/>
+
     </section>
   )
 }

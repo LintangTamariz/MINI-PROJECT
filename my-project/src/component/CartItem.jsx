@@ -45,9 +45,10 @@ const CartItem = ({ item }) => {
           <div className="flex gap-x-4 mb-2">
             <div>
               <Qty item={item} />
-              <div className="text-xl text-yellow-500">Rp. {item.attributes.price * item.amount} </div>
             </div>
-           
+            <div className="text-xl text-yellow-500">
+              Rp. {item.attributes.price * item.amount} 
+            </div>
           </div>
         </div>
         <div>

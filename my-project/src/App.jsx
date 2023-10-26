@@ -10,6 +10,7 @@ import Header from "./component/Header";
 import Footer from "./component/Footer";
 import Login from "./component/Login";
 import Register from "./component/Register";
+import Chat from "./component/Chat";
 
 const Layout = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const Layout = () => {
         <Route path="/products/:id" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/question" element={<Chat />} />
       </Routes>
       {window.location.pathname !== '/login' && window.location.pathname !== '/register' && <Footer />}
     </div>

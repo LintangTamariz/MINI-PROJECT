@@ -1,71 +1,118 @@
-import React, { createContext, useState, useEffect} from 'react'
+import React, { createContext, useState, useEffect } from "react";
 
-export const CartContext = createContext ()
+export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [cart, setCart] = useState([]);
-    const [itemsAmount, setItemsAmount] = useState(0);
-    const [amount, setAmount] = useState(0);
-    const [total, setTotal] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [itemsAmount, setItemsAmount] = useState(0);
+  const [amount, setAmount] = useState(0);
+  const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-      const amount = cart.reduce((a,c) => {
-        return a + c.amount;
-      }, 0);
+  useEffect(() => {
+    const amount = cart.reduce((a, c) => {
+      return a + c.amount;
+    }, 0);
 
-      setItemsAmount(amount);
-    }, [cart]);
+    setItemsAmount(amount);
+  }, [cart]);
 
-    // add to cart
-    const addToCart = (item, id) => {
-      const itemID = parseInt(id);
-      const newItem = {...item[0], amount: 1};
-      setCart ([...cart, newItem]);
+  useEffect(() => {
+    const total = cart.reduce((a, c) => {
+      return a + c.attributes.price * c.amount;
+    }, 0);
+    setTotal(total);
+  }, [cart]);
 
-      // check item is alreade in cart
-      const cartItem = cart.find(item => {
-        return item.id === itemID
-      })
+  // add to cart
+  const addToCart = (item, id) => {
+    const itemID = parseInt(id);
+    const newItem = { ...item[0], amount: 1 };
+    setCart([...cart, newItem]);
 
-      if (cartItem) {
-        const newCart = cart.map(item => {
-          if (item.id === itemID) {
-            setAmount (cartItem.amount + 1)
-            return {...item, amount: cartItem.amount + 1};
-          } else {
-            return item;
-          };
-        });
-        setCart(newCart);
-      } else {
-        setCart([...cart, newItem]);
-      }
-      // open the cart sibar
-      setIsOpen(true);
-    };
+    // check item is alreade in cart
+    const cartItem = cart.find((item) => {
+      return item.id === itemID;
+    });
 
-    // remove the cart
-    const removeFromCart = (id) => {
-      const newCart = cart.filter(item => {
-        return item.id !== id;
+    if (cartItem) {
+      const newCart = cart.map((item) => {
+        if (item.id === itemID) {
+          setAmount(cartItem.amount + 1);
+          return { ...item, amount: cartItem.amount + 1 };
+        } else {
+          return item;
+        }
       });
       setCart(newCart);
-    };
+    } else {
+      setCart([...cart, newItem]);
+    }
+    // open the cart sibar
+    setIsOpen(true);
+  };
+
+  // remove the cart
+  const removeFromCart = (id) => {
+    const newCart = cart.filter((item) => {
+      return item.id !== id;
+    });
+    setCart(newCart);
+  };
+
+  const isNav = (value) => {
+    return value === 1;
+  };
+
+  const handleInput = (e, id) => {
+    const value = parseInt(e.target.value);
+    //find item
+    const cartItem = cart.find((item) => {
+      return item.id === id;
+    });
+
+    if (cartItem) {
+      const newCart = cart.map((item) => {
+        if (item.id === id) {
+          if (isNav(value)) {
+            setAmount(1);
+            return { ...item, amount: 1 };
+          } else {
+            setAmount(value);
+            return { ...item, amount: value };
+          }
+        } else {
+          return item;
+        }
+      });
+      setCart(newCart);
+    }
+    setIsOpen(true);
+  };
+  // console.log(cart);
+
+  //clear cart
+  const clearCart = () =>{
+    setCart([]);
+  }
+
   return (
-    <CartContext.Provider 
-    value={{
-      isOpen, 
-      setIsOpen, 
-      addToCart, 
-      cart, 
-      removeFromCart, 
-      itemsAmount
-    }}
-      >
+    <CartContext.Provider
+      value={{
+        isOpen,
+        setIsOpen,
+        addToCart,
+        cart,
+        removeFromCart,
+        itemsAmount,
+        handleInput,
+        total,
+        clearCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
-  )
-}
+  );
+};
 
-export default CartProvider
+export default CartProvider;

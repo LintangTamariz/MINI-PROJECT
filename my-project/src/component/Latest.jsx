@@ -11,7 +11,7 @@ const Latest = () => {
   return (
     <div className="mb-16">
       <div className="container mx-auto">
-        <h2 className="text-2xl mb-6 text-center xl: text-left">Latest Products</h2>
+        <h2 className="h2 uppercase mb-9 text-center lg:text-left">Latest Products</h2>
       </div>
       <ProductSlider data={data}/>
     </div>
