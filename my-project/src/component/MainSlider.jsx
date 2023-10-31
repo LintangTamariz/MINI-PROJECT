@@ -11,7 +11,6 @@ import useFetch from "../hooks/useFetch";
 // Import component
 import CameraImg from "../img/camera.png";
 
-
 const sliderData = [
   {
     img: CameraImg,
@@ -51,9 +50,6 @@ const MainSlider = () => {
                   {slide.title1} <br />
                   {slide.title2} <br />
                 </div>
-                <button onClick={() => addToCart(data, id)} className="bg-yellow-500 p-2 rounded-md text-black hover:border-2 hover:bg-[#ffffff] w-[100px] mb-10 cursor-pointer">
-                Add to Cart
-              </button>
               </div>
               <div className="flex-1">
                 <img

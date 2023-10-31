@@ -26,9 +26,6 @@ const Hero = () => {
                 <div className="text-[20px] uppercase font-medium leading-tight mb-4">
                   Our Popular DSLR Camera
                 </div>
-                <a href="#" className="uppercase text-yellow-500">
-                  Add chart
-                </a>
               </div>
               <img
                 className="absolute z-20 -top-2 -right-6"
@@ -42,9 +39,7 @@ const Hero = () => {
                 <div className="text-[20px] uppercase font-medium leading-tight mb-4">
                   Our Popular Mirrorless Camera
                 </div>
-                <a href="#" className="uppercase text-yellow-500">
-                  Add chart
-                </a>
+
               </div>
               <img
                 className="absolute z-20 top-4 -right-6"

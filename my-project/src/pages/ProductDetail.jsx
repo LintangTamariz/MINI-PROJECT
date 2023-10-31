@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 
 import useFetch from "../hooks/useFetch";
 
@@ -9,8 +9,27 @@ import RelatedProducts from "../component/RelatedProduct";
 import { CartContext } from "../context/CartContext";
 
 const ProductDetail = () => {
-  const {addToCart} = useContext(CartContext)
+  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
   const { id } = useParams();
+
+  // const [loggedIn, setLoggedIn] = useState(false);
+  // const [data, setData] = useState('');
+
+  // const handleLogin = () => {
+  //   // Implement logic for user login
+  //   setLoggedIn(true);
+  // };
+
+  // const handleSubmit = () => {
+  //   if (loggedIn) {
+  //     // Implement data submission logic
+  //     // For example, submitData(data);
+  //     console.log("Data submitted:", data);
+  //   } else {
+  //     alert("Anda harus login terlebih dahulu!");
+  //   }
+  // };
 
   // get product data by id
   const { data } = useFetch(
@@ -19,9 +38,9 @@ const ProductDetail = () => {
   if (!data) {
     return <div className="container mx-auto">loading...</div>;
   }
-  //category title 
+  //category title
   const categoryTitle = data[0].attributes.categories.data[0].attributes.title;
- 
+
   return (
     <div className="mb-16 pt-44 lg:pt-[30px] xl:pt-0">
       <div className="container mx-auto">
@@ -49,13 +68,16 @@ const ProductDetail = () => {
               <div className="text-3xl mb-12  font-semibold">
                 Rp.{data[0].attributes.price}/Day
               </div>
-              <button onClick={() => addToCart(data, id)} className="bg-yellow-500 p-2 rounded-md text-black hover:border-2 hover:bg-[#ffffff] w-[100px] mb-10">
+              <button
+                onClick={() => addToCart(data, id)}
+                className="bg-yellow-500 p-2 rounded-md text-black hover:border-2 hover:bg-[#ffffff] w-[100px] mb-10"
+              >
                 Add to Cart
               </button>
             </div>
           </div>
         </div>
-        <RelatedProducts categoryTitle={categoryTitle}/>
+        <RelatedProducts categoryTitle={categoryTitle} />
       </div>
     </div>
   );

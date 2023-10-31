@@ -1,15 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 
 import CartItem from "./CartItem";
 
 const Cart = () => {
+  const [barang, setBarang] = useState(() => {
+    return JSON.parse(localStorage.getItem('cartItem')) || []
+  });
+    
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('cartItem'))
+  }, [barang]);
+
+  const [price, setPrice] = useState(() => {
+    return JSON.parse(localStorage.getItem('total')) || []
+  });
+    
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('total'))
+  }, [price]);
+
+
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
   return (
     <div className="w-full h-full px-4 text-white">
       <div className="overflow-y-auto overflow-x-hidden h-[75vh]">
         <div
-          onClick={() => setIsOpen(false)}
+          onClick={() => location.reload()}
           className="flex justify-start mt-8 cursor-pointer"
         >
           <svg
@@ -18,7 +35,7 @@ const Cart = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-10 h-10"
+            className="w-30 h-10"
           >
             <path
               strokeLinecap="round"
@@ -27,29 +44,32 @@ const Cart = () => {
             />
           </svg>
         </div>
+        
         <div className="flex flex-col gap-y-10 px-2">
           {cart.map((item) => {
             return <CartItem item={item} key={item.id} />;
           })}
         </div>
       </div>
+
+      
       {/*subtotal*/}
-      {cart.length >= 1 && (
+      {cart.length >= 0 && (
         <div className="px-6 py-10 flex flex-col">
           {/*subtotal*/}
           <div className="flex justify-between text-lg">
             <div>Subtotal</div>
-            <div>Rp. {total}</div>
+            <div>Rp. {price}</div>
           </div>
           {/*total*/}
           <div className="flex justify-between text-2xl">
             <div>Total</div>
-            <div>Rp. {total}</div>
+            <div>Jumlah : {barang}</div>
           </div>
         </div>
       )}
       <div>
-        {cart.length >= 1 ? (
+        {cart.length >= 0 ? (
           <div className="flex justify-between gap-x-4">
             <button 
             onClick={clearCart}
@@ -64,7 +84,6 @@ const Cart = () => {
           <div className="h-full absolute top-0 right-0 left-0 flex justify-center -z-10 flex-col text-center text-white/20">
             <div className="text-3xl">your cart is empty</div>
           </div>
-
         )}
       </div>
     </div>

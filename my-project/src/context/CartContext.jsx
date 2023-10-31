@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
-
+import React, { createContext, useState, useEffect,  } from "react";
+import { BrowserRouter as Router, Route, Link, Navigate } from 'react-router-dom';
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
@@ -8,12 +8,12 @@ const CartProvider = ({ children }) => {
   const [itemsAmount, setItemsAmount] = useState(0);
   const [amount, setAmount] = useState(0);
   const [total, setTotal] = useState(0);
+  // const navigate = useNavigate(true);
 
   useEffect(() => {
     const amount = cart.reduce((a, c) => {
       return a + c.amount;
     }, 0);
-
     setItemsAmount(amount);
   }, [cart]);
 
@@ -24,32 +24,43 @@ const CartProvider = ({ children }) => {
     setTotal(total);
   }, [cart]);
 
-  // add to cart
+  // add to wcart 
   const addToCart = (item, id) => {
-    const itemID = parseInt(id);
-    const newItem = { ...item[0], amount: 1 };
-    setCart([...cart, newItem]);
+    const isLoggedIn = localStorage.getItem('authToken');
+    // console.log(isLoggedIn);
 
-    // check item is alreade in cart
-    const cartItem = cart.find((item) => {
-      return item.id === itemID;
-    });
-
-    if (cartItem) {
-      const newCart = cart.map((item) => {
-        if (item.id === itemID) {
-          setAmount(cartItem.amount + 1);
-          return { ...item, amount: cartItem.amount + 1 };
-        } else {
-          return item;
-        }
-      });
-      setCart(newCart);
-    } else {
+    if (isLoggedIn) {
+      const itemID = parseInt(id);
+      const newItem = { ...item[0], amount: 1 };
       setCart([...cart, newItem]);
-    }
-    // open the cart sibar
-    setIsOpen(true);
+  
+      // check item is alreade in cart
+      const cartItem = cart.find((item) => {
+        return item.id === itemID;
+      });
+  
+      if (cartItem) {
+        const newCart = cart.map((item) => {
+          if (item.id === itemID) {
+            setAmount(cartItem.amount + 1);
+            localStorage.setItem('cartItem', JSON.stringify(cartItem.amount+1));
+            localStorage.setItem('total', JSON.stringify(total));
+            return { ...item, amount: cartItem.amount + 1 };
+          } else {
+            return item;
+          }
+        });
+        setCart(newCart);
+      } else {
+        setCart([...cart, newItem]);
+      }
+      // open the cart sibar
+      setIsOpen(true);
+
+  
+    } else {
+      alert("Anda harus login terlebih dahulu!");
+      location.href = "/login";    }
   };
 
   // remove the cart
@@ -58,6 +69,7 @@ const CartProvider = ({ children }) => {
       return item.id !== id;
     });
     setCart(newCart);
+
   };
 
   const isNav = (value) => {
@@ -93,6 +105,9 @@ const CartProvider = ({ children }) => {
 
   //clear cart
   const clearCart = () =>{
+    localStorage.removeItem('cartItem');
+    localStorage.removeItem('total');
+    location.reload();
     setCart([]);
   }
 

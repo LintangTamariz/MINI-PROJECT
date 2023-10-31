@@ -5,7 +5,7 @@ import logo from "../img/logo.png";
 const Register = () => {
   return (
     <div>
-      <div className="bg-gray-50 dark:bg-gray-900">
+      <div className="bg-[#1A1C21] dark:bg-[#1A1C21]">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
