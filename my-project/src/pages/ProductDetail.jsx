@@ -13,24 +13,6 @@ const ProductDetail = () => {
   const { addToCart } = useContext(CartContext);
   const { id } = useParams();
 
-  // const [loggedIn, setLoggedIn] = useState(false);
-  // const [data, setData] = useState('');
-
-  // const handleLogin = () => {
-  //   // Implement logic for user login
-  //   setLoggedIn(true);
-  // };
-
-  // const handleSubmit = () => {
-  //   if (loggedIn) {
-  //     // Implement data submission logic
-  //     // For example, submitData(data);
-  //     console.log("Data submitted:", data);
-  //   } else {
-  //     alert("Anda harus login terlebih dahulu!");
-  //   }
-  // };
-
   // get product data by id
   const { data } = useFetch(
     `http://localhost:1337/api/products?populate=*&filters[id][$eq]=${id}`

@@ -12,9 +12,17 @@ import Login from "./component/Login";
 import Register from "./component/Register";
 import Chat from "./component/Chat";
 import Admin from "./pages/Admin";
+import Checkout from "./component/Checkout";
 
 const Layout = () => {
   const location = useLocation();
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleCheckout = () => {
+    // Lakukan logika checkout di sini
+    // Misalnya, Anda bisa menyetel keranjang kembali ke array kosong setelah checkout
+    setCartItems([]);
+  };
   return (
     <div>
       {window.location.pathname !== '/login' && window.location.pathname !== '/register' && window.location.pathname !== '/admin' && <Header />}
@@ -27,6 +35,7 @@ const Layout = () => {
         <Route path="/search" element={<Search />} />
         <Route path="/question" element={<Chat />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/checkout" onCheckout={handleCheckout} element={<Checkout /> } />
       </Routes>
       {window.location.pathname !== '/login' && window.location.pathname !== '/register' && <Footer />}
     </div>
@@ -49,14 +58,7 @@ const App = () => {
       setUser(storedUser);
     }
   }, []);
-    // const [authToken, setToken] = useState(localStorage.getItem('authToken') || '');
-    // useEffect(() => {
-    //   // Cek token saat komponen dimuat kembali
-    //   const storedToken = localStorage.getItem('authToken');
-    //   if (storedToken) {
-    //     setToken(storedToken);
-    //   }
-    // }, []);
+
   return (
     <div>
       <Router>

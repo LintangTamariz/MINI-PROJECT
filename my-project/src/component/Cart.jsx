@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
-
+import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 
 const Cart = () => {
@@ -13,13 +13,12 @@ const Cart = () => {
   }, [barang]);
 
   const [price, setPrice] = useState(() => {
-    return JSON.parse(localStorage.getItem('total')) || []
+    return JSON.parse(localStorage.getItem('totalHarga')) || []
   });
     
   useEffect(() => {
-    JSON.parse(localStorage.getItem('total'))
-  }, [price]);
-
+    JSON.parse(localStorage.getItem('totalHarga'))
+  }, [price]);  
 
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
   return (
@@ -76,9 +75,12 @@ const Cart = () => {
             className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all">
               clear cart
             </button>
-            <button className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all flex-1 px-2 gap-x-2">
-              checkout
-            </button>
+            <Link to="/checkout">
+              <button 
+              className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all flex-1 px-2 gap-x-2">
+                checkout
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="h-full absolute top-0 right-0 left-0 flex justify-center -z-10 flex-col text-center text-white/20">
