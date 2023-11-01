@@ -26,14 +26,16 @@ const Product = ({ product }) => {
         <div className="px-6 pb-8 flex flex-col">
           {/*category tittle*/}
           <div className="text-sm text-yellow-500 capitalize mb-2">
-            {product.attributes.categories.data[0].attributes.title}</div>
+            {product.attributes.categories.data[0].attributes.title}
+          </div>
           {/*tittle*/}
           <div className="text-[15px] mb-4 lg:mb-9">
             {product.attributes.title.substring(0, 35)}...
           </div>
           {/*price*/}
           <div className="text-xl text-yellow-500">
-            Rp.{product.attributes.price} /hari</div>
+            Rp.{product.attributes.price} /Day
+          </div>
         </div>
       </div>
     </Link>

@@ -39,7 +39,6 @@ const Hero = () => {
                 <div className="text-[20px] uppercase font-medium leading-tight mb-4">
                   Our Popular Mirrorless Camera
                 </div>
-
               </div>
               <img
                 className="absolute z-20 top-4 -right-6"

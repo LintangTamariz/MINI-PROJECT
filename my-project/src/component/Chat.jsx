@@ -25,9 +25,10 @@ const Chat = () => {
   console.log("result : ", result);
   return (
     <section className="container mx-auto">
-      <h2 className="h2 uppercase mb-9 text-center lg:text-leftt">ANY QUESTION?</h2>
+      <h2 className="h2 uppercase mb-9 text-center lg:text-leftt">
+        ANY QUESTION?
+      </h2>
       <div className="flex justify-center items-center">
-        
         <div className="flex gap-x-3">
           <input
             className="w-[500px] h-[100px] border border-yellow-500 focus:outline-none p-3 bg-white rounded-md text-black font-semibold text-lg text-center"

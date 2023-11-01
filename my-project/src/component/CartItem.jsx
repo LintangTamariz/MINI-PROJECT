@@ -1,13 +1,11 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Qty from "../component/Qty";
-
 import { CartContext } from "../context/CartContext";
 
-
 const CartItem = ({ item }) => {
-    const {removeFromCart} = useContext(CartContext)
+  const { removeFromCart } = useContext(CartContext);
   return (
     <div className="flex gap-x-8">
       <Link to={`/product/${item.id}`} className="w-[70px] h-[70px]">
@@ -21,9 +19,10 @@ const CartItem = ({ item }) => {
           <Link className="" to={`/product/${item.id}`}>
             {item.attributes.title}
           </Link>
-          <div 
-          onClick={() => removeFromCart(item.id)}
-          className="cursor-pointer">
+          <div
+            onClick={() => removeFromCart(item.id)}
+            className="cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/sv g"
               fill="none"
@@ -47,15 +46,15 @@ const CartItem = ({ item }) => {
               <Qty item={item} />
             </div>
             <div className="text-xl text-yellow-500">
-              Rp. {item.attributes.price * item.amount} 
+              Rp. {item.attributes.price * item.amount}
             </div>
           </div>
         </div>
         <div>
-            <span className="text-yellow-500">
-              Rp. {item.attributes.price}/Day
-            </span>
-          </div>
+          <span className="text-yellow-500">
+            Rp. {item.attributes.price}/Day
+          </span>
+        </div>
       </div>
     </div>
   );

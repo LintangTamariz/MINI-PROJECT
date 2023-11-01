@@ -1,5 +1,10 @@
-import React, { createContext, useState, useEffect,  } from "react";
-import { BrowserRouter as Router, Route, Link, Navigate } from 'react-router-dom';
+import React, { createContext, useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
@@ -8,55 +13,58 @@ const CartProvider = ({ children }) => {
   const [itemsAmount, setItemsAmount] = useState(0);
   const [amount, setAmount] = useState(0);
   const [total, setTotal] = useState();
-  // const navigate = useNavigate(true);
 
+  //Menghitung total item
   useEffect(() => {
     const amount = cart.reduce((a, c) => {
       return a + c.amount;
     }, 0);
     setItemsAmount(amount);
   }, [cart]);
-  
 
-  
   useEffect(() => {
-    // Retrieve the total price from local storage
-    const storedTotal = localStorage.getItem('totalHarga');
-    
+    // Mengambil total harga dari penyimpanan lokal
+    const storedTotal = localStorage.getItem("totalHarga");
+
     // Calculate the total price of all items in the cart
-    const total = cart.reduce((a, c) => {
-      return c.attributes.price * c.amount;
-    }, storedTotal ? JSON.parse(storedTotal) : 0);
-  
+    const total = cart.reduce(
+      (a, c) => {
+        return c.attributes.price * c.amount;
+      },
+      storedTotal ? JSON.parse(storedTotal) : 0
+    );
+
     // Store the total price in the local storage
-    localStorage.setItem('totalHarga', JSON.stringify(total));
-  
+    localStorage.setItem("totalHarga", JSON.stringify(total));
+
     // Update the state variable 'total' with the calculated total
     setTotal(total);
   }, [cart]);
-  
-  
-  // add to wcart 
+
+  // add to wcart
   const addToCart = (item, id) => {
-    const isLoggedIn = localStorage.getItem('authToken');
+    const isLoggedIn = localStorage.getItem("authToken"); //cek user login
     // console.log(isLoggedIn);
-    
+
     if (isLoggedIn) {
       const itemID = parseInt(id);
       const newItem = { ...item[0], amount: 1 };
       setCart([...cart, newItem]);
-      
+
       // check item is alreade in cart
       const cartItem = cart.find((item) => {
         return item.id === itemID;
       });
-      
+
       if (cartItem) {
         const newCart = cart.map((item) => {
           if (item.id === itemID) {
-            localStorage.setItem('cartItem', JSON.stringify(cartItem.amount+1));
+            localStorage.setItem(
+              "cartItem",
+              JSON.stringify(cartItem.amount + 1)
+            );
             // localStorage.setItem('total', JSON.stringify(total));
-            setAmount(cartItem.amount+1);
+            setAmount(cartItem.amount + 1);
 
             return { ...item, amount: cartItem.amount + 1 };
           } else {
@@ -64,17 +72,15 @@ const CartProvider = ({ children }) => {
           }
         });
         setCart(newCart);
-
       } else {
         setCart([...cart, newItem]);
       }
       // open the cart sibar
       setIsOpen(true);
-
-  
     } else {
       alert("Anda harus login terlebih dahulu!");
-      location.href = "/login";    }
+      location.href = "/login";
+    }
   };
 
   // remove the cart
@@ -83,7 +89,6 @@ const CartProvider = ({ children }) => {
       return item.id !== id;
     });
     setCart(newCart);
-
   };
 
   const isNav = (value) => {
@@ -118,13 +123,13 @@ const CartProvider = ({ children }) => {
   // console.log(cart);
 
   //clear cart
-  const clearCart = () =>{
-    localStorage.removeItem('cartItem');
-    localStorage.removeItem('total');
-    localStorage.removeItem('totalHarga');
+  const clearCart = () => {
+    localStorage.removeItem("cartItem");
+    localStorage.removeItem("total");
+    localStorage.removeItem("totalHarga");
     location.reload();
     setCart([]);
-  }
+  };
 
   return (
     <CartContext.Provider

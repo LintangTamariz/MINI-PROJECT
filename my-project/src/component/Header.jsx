@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import logo from "../img/logo.png";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -8,34 +8,22 @@ import CategoryNavMobile from "../component/CategoryNavMobile";
 import Cart from "../component/Cart";
 import { removeToken, getUser } from "../helpers";
 
-//
-
 import { CartContext } from "../context/CartContext";
 
 const Header = () => {
-  // const [user, setUser] = useState('');
-  // useEffect(() => {
-  //   const storedName = localStorage.getItem('user');
-  //   const userData = JSON.parse(storedName);
-  //   if (userData && userData.username) { 
-  //     // const username = storedName.username;
-  //     setUser(userData.username);
-  //     // return storedName.username
-  //   }
-  // }, []);
   const [todoList, setTodoList] = useState(() => {
-    return JSON.parse(localStorage.getItem('cartItem')) || []
+    return JSON.parse(localStorage.getItem("cartItem")) || [];
   });
-    
+
   useEffect(() => {
-    JSON.parse(localStorage.getItem('cartItem'))
+    JSON.parse(localStorage.getItem("cartItem"));
   }, [todoList]);
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     // Mengambil data dari localStorage
-    const storedData = localStorage.getItem('user');
+    const storedData = localStorage.getItem("user");
     const userData = JSON.parse(storedData);
 
     // Mendapatkan username jika data ditemukan
@@ -44,12 +32,10 @@ const Header = () => {
     }
   }, []);
 
-  // const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
   const handleLogout = () => {
     removeToken();
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     navigate("/login", { replace: true });
   };
 
@@ -80,9 +66,9 @@ const Header = () => {
                 Any Question?
               </div>
             </Link>
+
             {username ? (
               <div className="flex">
-
                 <button
                   onClick={handleLogout}
                   className="bg-[#1A1C21] border-2 border-[#F5B321]  ml-3 h-[40px] justify-center items-center rounded-[8px] px-10 top-0 right-0 hover:bg-yellow-400 transition-all"
@@ -93,14 +79,13 @@ const Header = () => {
               </div>
             ) : (
               <div>
-                <Link to={'/login'}>
-                                <button
-                  // onClick={handleLogout}
-                  className="bg-[#F5B321] border-2 border-[#F5B321]  ml-3 h-[40px] justify-center items-center rounded-[8px] px-10 top-0 right-0 hover:bg-[#1A1C21] transition-all"
-                >
-                  Login
-                </button>
-
+                <Link to={"/login"}>
+                  <button
+                    // onClick={handleLogout}
+                    className="bg-[#F5B321] border-2 border-[#F5B321]  ml-3 h-[40px] justify-center items-center rounded-[8px] px-10 top-0 right-0 hover:bg-[#1A1C21] transition-all"
+                  >
+                    Login
+                  </button>
                 </Link>
               </div>
             )}

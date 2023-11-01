@@ -1,18 +1,17 @@
 import React from "react";
-
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import useFetch from "../hooks/useFetch";
 
 const CategoryNavMobile = ({ setCatNavMobile }) => {
+  const { data } = useFetch("http://localhost:1337/api/categories?");
 
-  const {data} =  useFetch("http://localhost:1337/api/categories?");
-   
   return (
     <div className="w-full h-full bg-[#1A1C21] p-8">
-      <div 
-      onClick={() => setCatNavMobile(false)}
-      className="flex justify-end mb-8 cursor-pointer">
+      <div
+        onClick={() => setCatNavMobile(false)}
+        className="flex justify-end mb-8 cursor-pointer"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -31,14 +30,14 @@ const CategoryNavMobile = ({ setCatNavMobile }) => {
       <div className="flex flex-col gap-y-8">
         {data?.map((category) => {
           return (
-          <Link 
-          to={`products/${category.id}`}
-          className="uppercase font-medium" 
-          key={category.id}
-          >
-            {category.attributes.title} Cameras
-          </Link>
-          )
+            <Link
+              to={`products/${category.id}`}
+              className="uppercase font-medium"
+              key={category.id}
+            >
+              {category.attributes.title} Cameras
+            </Link>
+          );
         })}
       </div>
     </div>

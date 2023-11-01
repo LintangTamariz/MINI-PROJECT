@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useParams } from "react-router-dom";
 import "swiper/css";
@@ -21,7 +21,7 @@ const sliderData = [
 ];
 
 const MainSlider = () => {
-  const {addToCart} = useContext(CartContext)
+  const { addToCart } = useContext(CartContext);
   const { id } = useParams();
 
   // get product data by id

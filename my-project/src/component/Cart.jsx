@@ -5,20 +5,20 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const [barang, setBarang] = useState(() => {
-    return JSON.parse(localStorage.getItem('cartItem')) || []
+    return JSON.parse(localStorage.getItem("cartItem")) || [];
   });
-    
+
   useEffect(() => {
-    JSON.parse(localStorage.getItem('cartItem'))
+    JSON.parse(localStorage.getItem("cartItem"));
   }, [barang]);
 
   const [price, setPrice] = useState(() => {
-    return JSON.parse(localStorage.getItem('totalHarga')) || []
+    return JSON.parse(localStorage.getItem("totalHarga")) || [];
   });
-    
+
   useEffect(() => {
-    JSON.parse(localStorage.getItem('totalHarga'))
-  }, [price]);  
+    JSON.parse(localStorage.getItem("totalHarga"));
+  }, [price]);
 
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
   return (
@@ -43,7 +43,7 @@ const Cart = () => {
             />
           </svg>
         </div>
-        
+
         <div className="flex flex-col gap-y-10 px-2">
           {cart.map((item) => {
             return <CartItem item={item} key={item.id} />;
@@ -51,7 +51,6 @@ const Cart = () => {
         </div>
       </div>
 
-      
       {/*subtotal*/}
       {cart.length >= 0 && (
         <div className="px-6 py-10 flex flex-col">
@@ -70,14 +69,14 @@ const Cart = () => {
       <div>
         {cart.length >= 0 ? (
           <div className="flex justify-between gap-x-4">
-            <button 
-            onClick={clearCart}
-            className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all">
+            <button
+              onClick={clearCart}
+              className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all"
+            >
               clear cart
             </button>
             <Link to="/checkout">
-              <button 
-              className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all flex-1 px-2 gap-x-2">
+              <button className="bg-yellow-500 p-3 w-[100px] text-xl text-black font-semibold rounded-md hover:bg-yellow-400 transition-all flex-1 px-2 gap-x-2">
                 checkout
               </button>
             </Link>

@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
-
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import useFetch from "../hooks/useFetch";
-
 import RelatedProducts from "../component/RelatedProduct";
-
 import { CartContext } from "../context/CartContext";
 
 const ProductDetail = () => {

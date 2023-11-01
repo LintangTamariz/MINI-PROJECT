@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-
 import { useNavigate, Link } from "react-router-dom";
 
 const SearchForm = () => {
@@ -48,13 +46,6 @@ const SearchForm = () => {
           </svg>
         </button>
       </form>
-      <Link to={"/"}>
-      <button 
-      className="bg-[#1A1C21] border-2 border-[#F5B321]  ml-3 h-[40px] justify-center items-center rounded-[8px] px-10 top-0 right-0 hover:bg-yellow-400 transition-all">
-        Reset
-      </button>
-      </Link>
-
     </div>
   );
 };

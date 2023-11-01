@@ -11,7 +11,6 @@ import Footer from "./component/Footer";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import Chat from "./component/Chat";
-import Admin from "./pages/Admin";
 import Checkout from "./component/Checkout";
 
 const Layout = () => {
@@ -34,7 +33,6 @@ const Layout = () => {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/search" element={<Search />} />
         <Route path="/question" element={<Chat />} />
-        <Route path="/admin" element={<Admin />} />
         <Route path="/checkout" onCheckout={handleCheckout} element={<Checkout /> } />
       </Routes>
       {window.location.pathname !== '/login' && window.location.pathname !== '/register' && <Footer />}
