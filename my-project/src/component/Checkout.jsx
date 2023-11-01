@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
-import { Link } from "react-router-dom";
-import CartItem from "./CartItem";
+// import { Link } from "react-router-dom";
+// import CartItem from "./CartItem";
 
 const Checkout = () => {
   const [barang, setBarang] = useState(() => {

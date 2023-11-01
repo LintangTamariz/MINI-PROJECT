@@ -3,12 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useParams } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
-// import "../slider.css";
 
 import { CartContext } from "../context/CartContext";
 import useFetch from "../hooks/useFetch";
-
-// Import component
 import CameraImg from "../img/camera.png";
 
 const sliderData = [
@@ -31,11 +28,6 @@ const MainSlider = () => {
 
   return (
     <Swiper
-      // modules={[Pagination]}
-      loop={true}
-      pagination={{
-        clickable: true,
-      }}
       className=" grad w-[600px] h-full xl:bg-no-repeat max-w-lg lg:max-w-none rounded-md overflow-hidden"
     >
       {sliderData.map((slide, index) => {

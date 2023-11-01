@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import logo from "../img/logo.png";
-
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+
 import SearchFrom from "../component/SearchForm";
 import CategoryNavMobile from "../component/CategoryNavMobile";
 import Cart from "../component/Cart";
